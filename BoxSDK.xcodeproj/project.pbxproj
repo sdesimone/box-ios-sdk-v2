@@ -1787,7 +1787,7 @@
 			name = BoxSDKTests;
 			productName = BoxSDKTests;
 			productReference = E470434C16D41DC500FED29A /* BoxSDKTests.octest */;
-			productType = "com.apple.product-type.bundle";
+			productType = "com.apple.product-type.bundle.ocunit-test";
 		};
 		F0E5E2E617A78AEF00153646 /* BoxCocoaSDK */ = {
 			isa = PBXNativeTarget;
@@ -1824,7 +1824,7 @@
 			name = BoxCocoaSDKTests;
 			productName = BoxCocoaSDKTests;
 			productReference = F0E5E2FD17A78AEF00153646 /* BoxCocoaSDKTests.octest */;
-			productType = "com.apple.product-type.bundle";
+			productType = "com.apple.product-type.bundle.ocunit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -2095,7 +2095,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "echo \"Symlinkling ${TARGET_BUILD_DIR}/include/BoxSDK to ${BUILT_PRODUCTS_DIR}/BoxSDK\"\n\nln -fs \"${TARGET_BUILD_DIR}/include/BoxSDK\" \"${BUILT_PRODUCTS_DIR}/BoxSDK\"";
+			shellScript = "echo \"Symlinkling ${TARGET_BUILD_DIR}/include/BoxSDK to ${BUILT_PRODUCTS_DIR}/BoxSDK\"\n\nln -fs \"${TARGET_BUILD_DIR}/include/BoxSDK\" \"${BUILT_PRODUCTS_DIR}/BoxSDK\"\n\nFMK_NAME=BoxSDK\nFMK_VERSION=A\nFMK_DIR=${SRCROOT}/Products/${FMK_NAME}.framework\n\nif [ -d \"${FMK_DIR}\" ]\nthen\nrm -rf \"${FMK_DIR}\"\nfi\n\nmkdir -p \"${FMK_DIR}\"\nmkdir -p \"${FMK_DIR}/Versions\"\nmkdir -p \"${FMK_DIR}/Versions/${FMK_VERSION}\"\nmkdir -p \"${FMK_DIR}/Versions/${FMK_VERSION}/Resources\"\nmkdir -p \"${FMK_DIR}/Versions/${FMK_VERSION}/Headers\"\n\n# Creates the internal links.\nln -s \"${FMK_VERSION}\" \"${FMK_DIR}/Versions/Current\"\nln -s \"${FMK_DIR}/Versions/Current/Headers\" \"${FMK_DIR}/Headers\"\nln -s \"${FMK_DIR}/Versions/Current/Resources\" \"${FMK_DIR}/Resources\"\n\ncp -a \"${TARGET_BUILD_DIR}/include/BoxSDK/\" \"${FMK_DIR}/Headers/\"\ncp -a \"${TARGET_BUILD_DIR}/${FMK_NAME}Resources.bundle\" \"${FMK_DIR}/Resources\"\necho \"DOING IT\"\ncp -a \"${TARGET_BUILD_DIR}/lib${FMK_NAME}.a\" \"${FMK_DIR}/Versions/Current/${FMK_NAME}\"\necho \"DONE IT\"\n\nln -s \"Versions/Current/${FMK_NAME}\" \"${FMK_DIR}/${FMK_NAME}\"\n\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
